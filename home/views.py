@@ -18,6 +18,9 @@ def home(request):
 def signup(request):
     return render(request, "signup.html")
 
+def about(request):
+    return render(request, "about.html")
+
 def register_user(request):
     if request.method == 'POST':
         data = request.POST
