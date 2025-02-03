@@ -1,4 +1,5 @@
-<header class="bg-white shadow-sm fixed flex w-full items-center justify-center">
+{% load static %}
+<header class="bg-white shadow-sm fixed flex w-full items-center justify-center top-0" style="z-index: 20;">
     <div class="container w-full px-4 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold">Schdent</div>
         <nav class="space-x-8">
@@ -9,9 +10,55 @@
             <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="/guide">guide</a>
             <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="/testimonals">testimonals</a>
         </nav>
-        <div class="space-x-4">
-            <!-- <button class="text-gray-700" onclick="toggleModal('loginModal')">Login</button> -->
-            <button class="px-4 py-2 border border-yellow-500 text-yellow-500 rounded-full" onclick="toggleModal('signupModal')">Sign Up</button>
+        {% if user.is_authenticated %}
+<div class="relative">
+    <!-- Avatar Button -->
+    <button id="profileDropdownBtn" class="flex items-center space-x-2 focus:outline-none">
+        <img src="{% static 'img/photo-handsome-unshaven-guy-looks-with-pleasant-expression-directly-camera.jpg' %}" alt="User Avatar" class="w-10 h-10 rounded-full border border-gray-300">
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg hidden">
+        <div class="px-4 py-3 border-b">
+            <p class="text-sm text-gray-600">{{ user.email }}</p>
         </div>
+        <ul class="py-2">
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+            </li>
+            <li>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100">Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% else %}
+<div class="space-x-4">
+    <button id="loginButton" class="px-4 py-2 border border-yellow-500 text-yellow-500 rounded-full hover:bg-yellow-500 hover:text-white transition">Login</button>
+    <a href="/signup" class="px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition">Sign Up</a>
+</div>
+{% endif %}
+
     </div>
 </header>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const profileBtn = document.getElementById("profileDropdownBtn");
+        const profileDropdown = document.getElementById("profileDropdown");
+    
+        profileBtn.addEventListener("click", function () {
+            profileDropdown.classList.toggle("hidden");
+        });
+    
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!profileBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
+                profileDropdown.classList.add("hidden");
+            }
+        });
+    });
+    </script>
+    

@@ -12,4 +12,10 @@ urlpatterns = [
     path('guide',guide, name='guide'),
     path('testimonals',testimonals, name='testimonals'),
 
+    path('login/', login_user, name='login'),
+    path('logout/', logoutUser, name='logout'),
+    path('post-scholarship/', uploadScholarship, name='uploadscholarship'),
+    path('scholarship/<int:scholarship_id>/', scholarship_details, name='scholarship_details'),
+    path('api/post-scholarship/', post_scholarship, name='post_scholarship'),
+    path('api/categories/', category_suggestions, name='category_suggestions'),
 ]
