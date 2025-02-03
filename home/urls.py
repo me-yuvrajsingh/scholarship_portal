@@ -7,4 +7,9 @@ urlpatterns = [
     path('signup', signup, name='signup'),
     path('register', register_user, name='register_user'),
     path('about', about, name='about'),
+    path('platform',platform , name='platform'),
+    path('categories', categories, name='categories'),
+    path('guide',guide, name='guide'),
+    path('testimonals',testimonals, name='testimonals'),
+
 ]

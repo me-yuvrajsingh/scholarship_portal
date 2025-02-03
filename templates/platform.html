@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% block title %}Platform{% endblock title %}
+{% block body %}
+
+<style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+        }
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .colorful-bg {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #84fab0);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 154, 158, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 154, 158, 0.8);
+            }
+        }
+        .slide-in {
+            animation: slideIn 1s ease-in-out;
+        }
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .rotate {
+            animation: rotate 5s linear infinite;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+   {% include "components/navbar.html" %}
+
+    <!-- Hero Section -->
+    <section class="colorful-bg py-20 relative overflow-hidden">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-lg text-white font-semibold slide-in">WELCOME TO OUR PLATFORM</h2>
+            <h1 class="text-5xl font-bold text-white mt-4 slide-in">
+                Empowering Students Through <span class="text-yellow-300">Scholarships</span>
+            </h1>
+            <p class="mt-6 text-white max-w-2xl mx-auto slide-in">
+                We provide a comprehensive platform for students to find and apply for scholarships, enabling them to focus on their education without financial worries.
+            </p>
+            <div class="mt-8">
+                <a href="#features" class="bg-yellow-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300 hover:scale-105 glow">
+                    Explore Features
+                </a>
+            </div>
+        </div>
+        <!-- Floating Icons -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+            <div class="animate-float absolute top-20 left-10 text-white text-6xl opacity-30">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="animate-float absolute top-40 right-20 text-white text-6xl opacity-30">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <div class="animate-float absolute bottom-20 left-1/4 text-white text-6xl opacity-30">
+                <i class="fas fa-university"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-lg text-yellow-500 font-semibold">FEATURES</h2>
+                <h1 class="text-4xl font-bold text-gray-800">
+                    Why Choose <span class="text-yellow-500">Our Platform</span>?
+                </h1>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                    Our platform offers a range of features designed to make the scholarship application process easier and more efficient.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md card-hover text-center transform transition-all duration-300 hover:shadow-lg">
+                    <div class="mb-6">
+                        <i class="fas fa-search text-5xl text-yellow-500 rotate"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Easy Search</h3>
+                    <p class="mt-4 text-gray-600">
+                        Find scholarships that match your profile with our advanced search tools.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md card-hover text-center transform transition-all duration-300 hover:shadow-lg">
+                    <div class="mb-6">
+                        <i class="fas fa-check-circle text-5xl text-yellow-500 rotate"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Verified Scholarships</h3>
+                    <p class="mt-4 text-gray-600">
+                        We ensure that all scholarships listed on our platform are verified and legitimate.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md card-hover text-center transform transition-all duration-300 hover:shadow-lg">
+                    <div class="mb-6">
+                        <i class="fas fa-user-graduate text-5xl text-yellow-500 rotate"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Student Support</h3>
+                    <p class="mt-4 text-gray-600">
+                        Get personalized support and guidance throughout the application process.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-lg text-yellow-500 font-semibold">TESTIMONIALS</h2>
+                <h1 class="text-4xl font-bold text-gray-800">
+                    What Our <span class="text-yellow-500">Students Say</span>
+                </h1>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                    Hear from students who have successfully secured scholarships through our platform.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg shadow-lg-hover transform transition-all duration-300 hover:shadow-xl">
+                    <p class="text-gray-600">
+                        "Thanks to Schdent, I was able to find a scholarship that perfectly matched my needs. The process was so easy and straightforward!"
+                    </p>
+                    <div class="mt-6 flex items-center">
+                        <img alt="Student" class="w-12 h-12 rounded-full" src="https://via.placeholder.com/48"/>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-800">John Doe</h3>
+                            <p class="text-sm text-gray-500">Scholarship Recipient</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-lg-hover transform transition-all duration-300 hover:shadow-xl">
+                    <p class="text-gray-600">
+                        "The support I received from Schdent was incredible. They guided me through every step of the application process."
+                    </p>
+                    <div class="mt-6 flex items-center">
+                        <img alt="Student" class="w-12 h-12 rounded-full" src="https://via.placeholder.com/48"/>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Jane Smith</h3>
+                            <p class="text-sm text-gray-500">Scholarship Recipient</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg shadow-lg-hover transform transition-all duration-300 hover:shadow-xl">
+                    <p class="text-gray-600">
+                        "I highly recommend Schdent to any student looking for scholarships. It's a game-changer!"
+                    </p>
+                    <div class="mt-6 flex items-center">
+                        <img alt="Student" class="w-12 h-12 rounded-full" src="https://via.placeholder.com/48"/>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Michael Johnson</h3>
+                            <p class="text-sm text-gray-500">Scholarship Recipient</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock body %}

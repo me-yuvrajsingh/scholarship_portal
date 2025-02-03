@@ -15,6 +15,20 @@ def signup(request):
 def about(request):
     return render(request, "about.html")
 
+def platform(request):
+    return render(request, "platform.html")
+
+def categories(request):
+    return render(request, "categories.html")
+
+def guide(request):
+    return render(request, "guide.html")
+    
+def testimonals(request):
+    return render(request, "testimonals.html")
+
+
+
 def register_user(request):
     if request.method == 'POST':
         data = request.POST
