@@ -125,3 +125,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # added annualy 
 STATICFILES_DIRS = [BASE_DIR / "static"]
+AUTH_USER_MODEL = 'home.CustomUser'

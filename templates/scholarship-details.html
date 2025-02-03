@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}
+{{ scholarship.title }}
+{% endblock title %}
+{% block body %}
+  {% include "components/navbar.html" %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <div class="container mx-auto py-12 px-6 max-w-4xl">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden opacity-0" id="scholarshipCard">
+            {% if scholarship.poster %}
+                <img src="{{ scholarship.poster.url }}" alt="Scholarship Poster" class="w-full h-64 object-cover">
+            {% endif %}
+            <div class="p-8">
+                <h2 class="text-3xl font-bold text-gray-900">{{ scholarship.title }}</h2>
+                <p class="text-gray-500 mt-2">Posted by: <span class="font-semibold">{{ scholarship.posted_by }}</span></p>
+                <p class="text-gray-500">Category: <span class="font-semibold">{{ scholarship.category }}</span></p>
+                <p class="text-gray-500">Scholarship Amount: <span class="font-semibold text-green-600">₹{{ scholarship.amount }}</span></p>
+                <p class="text-gray-500">Last Date to Apply: <span class="font-semibold text-red-500">{{ scholarship.last_date }}</span></p>
+                
+                <div class="mt-6 border-t pt-4 opacity-0" id="documentsSection">
+                    <h3 class="text-xl font-semibold text-gray-800">Documents Required</h3>
+                    <p class="text-gray-600 mt-2">{{ scholarship.documents_required }}</p>
+                </div>
+                
+                <div class="mt-6 border-t pt-4 opacity-0" id="requirementsSection">
+                    <h3 class="text-xl font-semibold text-gray-800">Other Requirements</h3>
+                    <p class="text-gray-600 mt-2">{{ scholarship.other_requirements }}</p>
+                </div>
+                
+                <div class="mt-6 text-center opacity-0" id="applyButton">
+                    <button data-toggle="modal" data-target="#applyModal{{ scholarship.id }}" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for applying -->
+<div class="modal fade" id="applyModal{{ scholarship.id }}" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel{{ scholarship.id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="applyModalLabel{{ scholarship.id }}">Apply for {{ scholarship.title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Scholarship application form -->
+                <form method="post" action="{% url 'apply_scholarship' scholarship.id %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            gsap.to("#scholarshipCard", { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
+            gsap.to("#documentsSection", { opacity: 1, y: -10, duration: 1, delay: 0.5, ease: "power2.out" });
+            gsap.to("#requirementsSection", { opacity: 1, y: -10, duration: 1, delay: 1, ease: "power2.out" });
+            gsap.to("#applyButton", { opacity: 1, scale: 1.1, duration: 1, delay: 1.5, ease: "elastic.out(1, 0.3)" });
+        });
+    </script>
+{% endblock body %}
