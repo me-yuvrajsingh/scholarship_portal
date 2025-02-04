@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout/', logoutUser, name='logout'),
     path('post-scholarship/', uploadScholarship, name='uploadscholarship'),
     path('scholarship/<int:scholarship_id>/', scholarship_details, name='scholarship_details'),
+    path('category/<str:category>/', scholarships_by_category, name='scholarships_by_category'),
     path('api/post-scholarship/', post_scholarship, name='post_scholarship'),
     path('api/categories/', category_suggestions, name='category_suggestions'),
 ]
