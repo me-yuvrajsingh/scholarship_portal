@@ -13,4 +13,4 @@ urlpatterns = [
     path('category/<str:category>/', scholarships_by_category, name='scholarships_by_category'),
     path('api/post-scholarship/', post_scholarship, name='post_scholarship'),
     path('api/categories/', category_suggestions, name='category_suggestions'),
-]
+] 
