@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %} - Scholarship</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    <script src="https://cdn.tailwindcss.com"></script>
     {% block body %}
       
     {% endblock body %}
     {% include "components/login.html" %}
-    <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>

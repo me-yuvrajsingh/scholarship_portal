@@ -156,3 +156,33 @@ def post_scholarship(request):
 def scholarship_details(request, scholarship_id):
     scholarship = get_object_or_404(Scholarship, id=scholarship_id)
     return render(request, 'scholarship-details.html', {'scholarship': scholarship})
+
+def scholarships_by_category(request, category):
+    if category.lower() == "all":
+        scholarships = Scholarship.objects.all().order_by('-created_at')
+    else:
+        category_obj = get_object_or_404(Category, name__iexact=category)
+        scholarships = Scholarship.objects.filter(category=category_obj).order_by('-created_at')
+
+
+    if not scholarships.exists():
+        return JsonResponse({'error': 'No scholarships found for this category'}, status=404)
+
+    data = [
+        {
+            'id': scholarship.id,
+            'title': scholarship.title,
+            'posted_by': scholarship.posted_by.username,
+            'amount': float(scholarship.amount),  # Convert DecimalField to float
+            'last_date': scholarship.last_date.strftime('%Y-%m-%d'),  # Convert DateField to string
+            'category': scholarship.category.name,  # Get category name as a string
+            'documents_required': scholarship.documents_required,
+            'other_requirements': scholarship.other_requirements,
+            'poster': scholarship.poster.url if scholarship.poster else None
+        }
+        for scholarship in scholarships
+    ]
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return JsonResponse({'scholarships': data}, safe=False)
+    
+    return render(request, 'category.html', {"scholarships": data, "title": category})

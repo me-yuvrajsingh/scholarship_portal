@@ -9,6 +9,10 @@
 .hover-scale {
     transition: transform 0.3s ease;
 }
+.scholarship-card:hover{
+    border-radius: 8px;
+    transform: translateY(-10px) scale(1.1);
+}
 .hover-scale:hover {
     transform: scale(1.05);
 }
