@@ -5,19 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scholarship Signup</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        *{
+            transition: 0.5s;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white shadow-lg rounded-lg flex w-full overflow-hidden">
         <!-- Left Image Section -->
-        <div class="w-1/2 hidden lg:block">
-            <img src="https://source.unsplash.com/500x600/?education,students" alt="Scholarship" class="w-full h-full object-cover">
+        <div class="w-1/2 hidden lg:block" id="img-sec-sp" style="height: 100vh; position: fixed;">
+            <img src="https://plus.unsplash.com/premium_photo-1664372145436-5ee45ce6f923?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Scholarship" class="w-full h-full object-cover">
         </div>
         
         <!-- Right Form Section -->
         <div class="w-full lg:w-1/2 p-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Sign Up for Scholarship</h2>
+            <div class="flex justify-between align-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Post a Scholarship</h2>
+                <button type="button" class="p-3 bg-yellow-500 text-white font-bold rounded hover:bg-yellow-600 transition" onclick="showHideSection(1)">Register as a Student</button>
+            </div>
             <form action="/register" method="POST" enctype="multipart/form-data" class="space-y-4">
                 {% csrf_token %}
+                <input type="text" value="2" name="acc_type" hidden>
+                <input type="text" name="name" placeholder="Full Name" class="w-full p-3 border border-gray-300 rounded">
+                <input type="email" name="email" placeholder="Email" class="w-full p-3 border border-gray-300 rounded">
+                <input type="tel" name="phone_number" placeholder="Phone Number" class="w-full p-3 border border-gray-300 rounded">
+                <input type="text" name="gst_number" placeholder="GSTIN Number" class="w-full p-3 border border-gray-300 rounded">
+                
+                <input type="password" name="password" placeholder="Password" class="w-full p-3 border border-gray-300 rounded">
+                <input type="password" name="confirm_password" placeholder="Confirm Password" class="w-full p-3 border border-gray-300 rounded">
+                
+                <button type="submit" class="w-full p-3 bg-yellow-500 text-white font-bold rounded hover:bg-yellow-600 transition">Sign Up</button>
+            </form>
+        </div>
+        <div class="w-full lg:w-1/2 p-8">
+            <div class="flex justify-between align-center">
+                <h2 class="text-2xl font-bold text-gray-800">Sign Up for Scholarship</h2>
+                <button type="button" class="p-3 bg-yellow-500 text-white font-bold rounded hover:bg-yellow-600 transition" onclick="showHideSection(2)">Register as a Company</button>
+            </div>
+            <form action="/register" method="POST" enctype="multipart/form-data" class="space-y-4">
+                {% csrf_token %}
+                <input type="text" value="1" name="acc_type" hidden>
                 <input type="text" name="name" placeholder="Full Name" class="w-full p-3 border border-gray-300 rounded">
                 <input type="email" name="email" placeholder="Email" class="w-full p-3 border border-gray-300 rounded">
                 <input type="tel" name="phone_number" placeholder="Phone Number" class="w-full p-3 border border-gray-300 rounded">
@@ -43,5 +71,20 @@
             </form>
         </div>
     </div>
+    <script>
+        let imgSp = document.getElementById("img-sec-sp");
+        function showHideSection(sec_id){
+            switch (sec_id) {
+                case 1:
+                    imgSp.style.left='0';
+                    break;
+                case 2:
+                    imgSp.style.right='0';
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
 </body>
 </html>

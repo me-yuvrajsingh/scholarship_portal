@@ -5,17 +5,15 @@
 {% block body %}
   {% load static %}
   {% include "components/navbar.html" %}
-  {{user.email}}
-  {{user.phone_number}}
   <section class="container my-[104px] mx-auto">
-    <h2 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 3rem;">{{title}}</h2>
+    <h2 style="text-transform: capitalize; font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 3rem;">{{title}}</h2>
     <div style="display: flex; gap: 5%;">
       {% if scholarships %}
       {% for scholarship in scholarships %}
-          {% include "components/scholarship-template.html" with title=scholarship.title posted_by=scholarship.posted_by amount=scholarship.amount last_date=scholarship.last_date category=scholarship.category %}
+          {% include "components/scholarship-template.html" with title=scholarship.title scholarship_id=scholarship.id posted_by=scholarship.posted_by amount=scholarship.amount last_date=scholarship.last_date category=scholarship.category poster=scholarship.poster %}
       {% endfor %}
   {% else %}
-      <p class="text-center text-gray-500 text-lg mt-6">No scholarships found.</p>
+      <p class="text-center text-gray-500 text-lg mt-6 mx-auto">No scholarships found.</p>
   {% endif %}
   
 

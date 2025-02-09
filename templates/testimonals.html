@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Testimonials</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-</head>
-<body class="bg-gray-50">
-  <header class="bg-white shadow-sm">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="text-2xl font-bold">Schdent</div>
-      <nav class="space-x-8">
-        <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="home.html">Home</a>
-        <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="aboutus.html">About Us</a>
-        <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="platform.html">Platform</a>
-        <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="categories.html">Categories</a>
-        <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="guide.html">Guide</a>
-        <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="testimonals.html">Testimonials</a>
-        <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
+{% extends "base.html" %}
+{% block title %}
+  Testimonals
+{% endblock title %}
+{% block body %}
+{% include "components/navbar.html" %}
   <section class="py-12">
     <div class="text-center mb-8">
       <h2 class="text-orange-500 text-lg font-semibold animate-bounce">TESTIMONIALS</h2>
@@ -132,5 +113,4 @@
       </div>
     </div>
   </footer>
-</body>
-</html>
+  {% endblock body %}

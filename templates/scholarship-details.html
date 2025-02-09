@@ -3,39 +3,54 @@
 {{ scholarship.title }}
 {% endblock title %}
 {% block body %}
-  {% include "components/navbar.html" %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <div class="container mx-auto my-12 py-12 px-6 max-w-4xl">
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden opacity-0" id="scholarshipCard">
-            {% if scholarship.poster %}
-                <img src="{{ scholarship.poster.url }}" alt="Scholarship Poster" class="w-full h-64 object-cover">
-            {% endif %}
-            <div class="p-8">
-                <h2 class="text-3xl font-bold text-gray-900">{{ scholarship.title }}</h2>
-                <p class="text-gray-500 mt-2">Posted by: <span class="font-semibold">{{ scholarship.posted_by }}</span></p>
-                <p class="text-gray-500">Category: <span class="font-semibold">{{ scholarship.category }}</span></p>
-                <p class="text-gray-500">Scholarship Amount: <span class="font-semibold text-green-600">₹{{ scholarship.amount }}</span></p>
-                <p class="text-gray-500">Last Date to Apply: <span class="font-semibold text-red-500">{{ scholarship.last_date }}</span></p>
-                
-                <div class="mt-6 border-t pt-4 opacity-0" id="documentsSection">
-                    <h3 class="text-xl font-semibold text-gray-800">Documents Required</h3>
-                    <p class="text-gray-600 mt-2">{{ scholarship.documents_required }}</p>
-                </div>
-                
-                <div class="mt-6 border-t pt-4 opacity-0" id="requirementsSection">
-                    <h3 class="text-xl font-semibold text-gray-800">Other Requirements</h3>
-                    <p class="text-gray-600 mt-2">{{ scholarship.other_requirements }}</p>
-                </div>
-                
-                <div class="mt-6 text-center opacity-0" id="applyButton">
-                    <button data-toggle="modal" onclick="applyNowForm()" data-target="#applyModal{{ scholarship.id }}" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">Apply Now</button>
-                </div>
+{% include "components/navbar.html" %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<div class="container mx-auto my-12 py-12 px-6 max-w-4xl">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden opacity-0" id="scholarshipCard">
+        {% if scholarship.poster %}
+        <img src="{{ scholarship.poster.url }}" alt="Scholarship Poster" class="w-full h-64 object-cover">
+        {% endif %}
+        <div class="p-8">
+            <h2 class="text-3xl font-bold text-gray-900">{{ scholarship.title }}</h2>
+            <p class="text-gray-500 mt-2">Posted by: <span class="font-semibold">{{ scholarship.posted_by }}</span></p>
+            <p class="text-gray-500">Category: <span class="font-semibold">{{ scholarship.category }}</span></p>
+            <p class="text-gray-500">Scholarship Amount: <span class="font-semibold text-green-600">₹{{ scholarship.amount }}</span></p>
+            <p class="text-gray-500">Last Date to Apply: <span class="font-semibold text-red-500">{{ scholarship.last_date }}</span></p>
+
+            <div class="mt-6 border-t pt-4 opacity-0" id="documentsSection">
+                <h3 class="text-xl font-semibold text-gray-800">Documents Required</h3>
+                <p class="text-gray-600 mt-2">{{ scholarship.documents_required }}</p>
+            </div>
+
+            <div class="mt-6 border-t pt-4 opacity-0" id="requirementsSection">
+                <h3 class="text-xl font-semibold text-gray-800">Other Requirements</h3>
+                <p class="text-gray-600 mt-2">{{ scholarship.other_requirements }}</p>
+            </div>
+
+            <div class="mt-6 text-center opacity-0" id="applyButton">
+                {% if scholarship.posted_by == user %}
+                <a href="/scholarship/{{scholarship.id}}/applications" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">
+                    View Applications
+                </a>
+                {% else %}
+                {% if user_application %}
+                <button class="px-6 py-3 bg-gray-400 text-white rounded-lg font-bold cursor-not-allowed" disabled>
+                    {{ user_application.get_status_display }}
+                </button>
+                {% else %}
+                <button onclick="applyNowForm()"
+                    class="px-6 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition">
+                    Apply Now
+                </button>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal for applying -->
-<div class="modal fade" id="applyModal{{ scholarship.id }}" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel{{ scholarship.id }}" aria-hidden="true">
+<!-- Modal for applying -->
+<!-- <div class="modal fade" id="applyModal{{ scholarship.id }}" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel{{ scholarship.id }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -48,41 +63,48 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Apply Now Popup Form -->
 <div id="applyForm" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md transform scale-95 transition duration-300" id="applyFormContainer">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md transform scale-95 transition duration-300"
+        id="applyFormContainer">
         <h2 class="text-2xl font-bold text-gray-800 mb-4">Apply for Scholarship</h2>
         <form id="scholarshipApplyForm">
+            <input type="hidden" id="scholarshipId" value="{{scholarship.id}}">
             <div class="mb-4">
                 <label class="block text-gray-700">Name</label>
-                <input type="text" disabled value="{{user.first_name}} {{user.last_name}}" name="name" id="applyName" class="border border-gray-300 p-2 w-full rounded" required>
+                <input type="text" disabled value="{{user.first_name}} {{user.last_name}}" name="name" id="applyName"
+                    class="border border-gray-300 p-2 w-full rounded" required>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700">Email</label>
-                <input type="email" disabled value="{{user.email}}" name="email" id="applyEmail" class="border border-gray-300 p-2 w-full rounded" required>
+                <input type="email" disabled value="{{user.email}}" name="email" id="applyEmail"
+                    class="border border-gray-300 p-2 w-full rounded" required>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700">Why You Want to Apply?</label>
-                <textarea name="reason" id="applyReason" class="border border-gray-300 p-2 w-full rounded" rows="3" required></textarea>
+                <textarea name="reason" id="applyReason" class="border border-gray-300 p-2 w-full rounded" rows="3"
+                    required></textarea>
             </div>
             <div class="flex justify-between">
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Submit</button>
-                <button type="button" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition" onclick="closeApplyForm()">Cancel</button>
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Submit</button>
+                <button type="button" class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
+                    onclick="closeApplyForm()">Cancel</button>
             </div>
         </form>
     </div>
 </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            gsap.to("#scholarshipCard", { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
-            gsap.to("#documentsSection", { opacity: 1, y: -10, duration: 1, delay: 0.5, ease: "power2.out" });
-            gsap.to("#requirementsSection", { opacity: 1, y: -10, duration: 1, delay: 1, ease: "power2.out" });
-            gsap.to("#applyButton", { opacity: 1, scale: 1.1, duration: 1, delay: 1.5, ease: "elastic.out(1, 0.3)" });
-        });
-        function applyNowForm() {
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        gsap.to("#scholarshipCard", { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
+        gsap.to("#documentsSection", { opacity: 1, y: -10, duration: 1, delay: 0.5, ease: "power2.out" });
+        gsap.to("#requirementsSection", { opacity: 1, y: -10, duration: 1, delay: 1, ease: "power2.out" });
+        gsap.to("#applyButton", { opacity: 1, scale: 1.1, duration: 1, delay: 1.5, ease: "elastic.out(1, 0.3)" });
+    });
+    function applyNowForm() {
         const form = document.getElementById("applyForm");
         const formContainer = document.getElementById("applyFormContainer");
         form.classList.remove("hidden");
@@ -100,10 +122,25 @@
         }, 200); // Smooth closing animation
     }
 
-    document.getElementById("scholarshipApplyForm").addEventListener("submit", function(event) {
+    document.getElementById("scholarshipApplyForm").addEventListener("submit", function (event) {
         event.preventDefault();
-        alert("Application submitted successfully!");
-        closeApplyForm();
+        const scholarshipId = document.getElementById("scholarshipId").value;
+        const reason = document.getElementById("applyReason").value;
+
+        fetch(`/scholarship/${scholarshipId}/apply/`, {
+            method: "POST",
+            headers: { "X-CSRFToken": "{{ csrf_token }}" },
+            body: new URLSearchParams({ reason: reason })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Application submitted successfully!");
+                    closeApplyForm();
+                } else {
+                    alert(data.error);
+                }
+            });
     });
-    </script>
+</script>
 {% endblock body %}

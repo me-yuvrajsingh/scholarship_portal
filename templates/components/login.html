@@ -45,10 +45,15 @@
     const loginModal = document.getElementById('loginModal');
     const closeLoginModal = document.getElementById('closeLoginModal');
 
-    loginButton.addEventListener('click', () => {
+    // loginButton.addEventListener('click', () => {
+    //     loginModal.classList.remove('hidden');
+    //     loginModal.classList.add('animate-slide-down');
+    // });
+    
+    function openLoginForm(){
         loginModal.classList.remove('hidden');
         loginModal.classList.add('animate-slide-down');
-    });
+    }
 
     closeLoginModal.addEventListener('click', () => {
         loginModal.classList.add('hidden');
