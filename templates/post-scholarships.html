@@ -12,9 +12,42 @@
         <input type="hidden" id="posted_by" name="posted_by" value="{{ user.id }}">
         
         <div class="relative">
-            <input type="text" id="category" name="category" placeholder="Eligible Category" class="w-full p-3 border border-gray-300 rounded" required onkeyup="fetchCategories()">
-            <div id="categorySuggestions" class="absolute w-full bg-white border border-gray-300 rounded hidden"></div>
+            <label for="category">Select Category:</label>
+            <select id="category" name="category" class="w-full p-3 border border-gray-300 rounded" required>
+                <option value="">Select a Category</option>
+            </select>
         </div>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetchCategories();
+            });
+        
+            function fetchCategories() {
+                fetch("/get-categories/")  
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Categories fetched:", data);
+                        const categorySelect = document.getElementById("category");
+                        categorySelect.innerHTML = '<option value="">Select a Category</option>';
+        
+                        if (data.categories && data.categories.length > 0) {
+                            data.categories.forEach(category => {
+                                let option = document.createElement("option");
+                                option.value = category.name;  // Send category name instead of ID
+                                option.textContent = category.name;
+                                categorySelect.appendChild(option);
+                            });
+                        } else {
+                            let option = document.createElement("option");
+                            option.value = "";
+                            option.textContent = "No categories available";
+                            categorySelect.appendChild(option);
+                        }
+                    })
+                    .catch(error => console.error("Error fetching categories:", error));
+            }
+        </script>
     
         <input type="number" name="amount" placeholder="Scholarship Amount" class="w-full p-3 border border-gray-300 rounded" required>
         <label class="block text-gray-700 font-medium">Last Date to Apply</label>
@@ -34,33 +67,6 @@
     
 </div>
 <script>
-    function fetchCategories() {
-    const input = document.getElementById("category");
-    const suggestions = document.getElementById("categorySuggestions");
-
-    if (input.value.length < 2) {
-        suggestions.classList.add("hidden");
-        return;
-    }
-
-    fetch(`/api/categories/?query=${input.value}`)
-        .then(response => response.json())
-        .then(data => {
-            suggestions.innerHTML = "";
-            data.forEach(category => {
-                const div = document.createElement("div");
-                div.textContent = category;
-                div.classList.add("p-2", "cursor-pointer", "hover:bg-gray-200");
-                div.onclick = () => {
-                    input.value = category;
-                    suggestions.classList.add("hidden");
-                };
-                suggestions.appendChild(div);
-            });
-            suggestions.classList.remove("hidden");
-        });
-}
-
 document.getElementById("scholarshipForm").addEventListener("submit", function (event) {
     event.preventDefault();
 

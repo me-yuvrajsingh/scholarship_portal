@@ -57,7 +57,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Merit-Based</h3>
             <p class="text-gray-600">For students with exceptional academic achievements.</p>
-            <a href="#" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
+            <a href="/category/merit-based" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
         </div>
 
         <!-- Category Card 2: Need-Based -->
@@ -67,7 +67,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Need-Based</h3>
             <p class="text-gray-600">For students who demonstrate financial need.</p>
-            <a href="#" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
+            <a href="/category/financial" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
         </div>
 
         <!-- Category Card 3: Sports -->
@@ -77,7 +77,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Sports</h3>
             <p class="text-gray-600">For students excelling in sports and athletics.</p>
-            <a href="#" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
+            <a href="/category/sports" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
         </div>
 
         <!-- Category Card 4: STEM -->
@@ -87,7 +87,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">STEM</h3>
             <p class="text-gray-600">For students pursuing Science, Technology, Engineering, or Math.</p>
-            <a href="#" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
+            <a href="/category/stem" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
         </div>
 
         <!-- Category Card 5: Arts -->
@@ -97,7 +97,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Arts</h3>
             <p class="text-gray-600">For students excelling in visual, performing, or creative arts.</p>
-            <a href="#" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
+            <a href="/category/art" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
         </div>
 
         <!-- Category Card 6: Women-Specific -->
@@ -107,7 +107,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Women-Specific</h3>
             <p class="text-gray-600">Scholarships exclusively for female students.</p>
-            <a href="#" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
+            <a href="/category/female" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
         </div>
 
         <!-- Category Card 7: International -->
@@ -117,7 +117,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">International</h3>
             <p class="text-gray-600">For students studying abroad or international students.</p>
-            <a href="#" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
+            <a href="/category/international" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
         </div>
 
         <!-- Category Card 8: Minority -->
@@ -127,7 +127,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Minority</h3>
             <p class="text-gray-600">For students from underrepresented communities.</p>
-            <a href="#" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
+            <a href="/category/minority" class="mt-4 inline-block px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Explore</a>
         </div>
     </div>
 </section>
@@ -135,7 +135,12 @@
 <!-- Featured Scholarships Section -->
 <section class="container mx-auto px-4 py-16">
     <h2 class="text-3xl font-bold text-center mb-8">Featured Scholarships</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="flex" style="gap: 5%;">
+        {% for scholarship in scholarships  %}
+            {% include "components/scholarship-template.html" with title=scholarship.title scholarship_id=scholarship.id desc=scholarship.desc provided_by=scholarship.posted_by category=scholarship.category amount=scholarship.amount last_date=scholarship.last_date poster=scholarship.poster.url %}
+          {% empty %}
+          <p>No Scholarships Available</p>
+        {% endfor %}
         <!-- Scholarship Card 1 -->
         <div class="bg-white p-6 rounded-lg shadow-lg hover-scale">
             <h3 class="text-xl font-bold mb-2">Merit-Based Scholarship</h3>
