@@ -8,6 +8,6 @@
         <p class="text-gray-600">Category: <span class="font-semibold" id="sclp-category">{{category}}</span></p>
         <p class="text-gray-600">Amount: Rs.<span class="font-semibold" id="sclp-amt">{{amount}}</span></p>
         <p class="text-gray-600">Expiry Date: <span class="font-semibold" id="sclp-lastDate">{{last_date}}</span></p>
-        <button class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600"><a class="h-full w-full" href="/scholarship/{{scholarship_id}}">Apply Now</a></button>
+        <button class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600"><a class="h-full w-full" {% if provided_by == user %} href="/scholarship/{{scholarship_id}}/applications" {% else %} href="/scholarship/{{scholarship_id}}" {% endif %}>{% if provided_by == user %} View Applications {% else %} Apply Now {% endif %}</a></button>
     </div>
 </div>

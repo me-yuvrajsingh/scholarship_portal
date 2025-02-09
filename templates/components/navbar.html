@@ -1,14 +1,14 @@
 {% load static %}
-<header class="bg-white shadow-sm fixed flex w-full items-center justify-center top-0" style="z-index: 20;">
+<header class="bg-yellow-500 text-white shadow-sm fixed flex w-full items-center justify-center top-0" style="z-index: 20;">
     <div class="container w-full px-4 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold">Schdent</div>
         <nav class="space-x-8">
-            <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="/">Home</a>
-            <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="/about">aboutus</a>
-            <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="/platform">platform</a>
-            <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="/categories">categories</a>
-            <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="/guide">guide</a>
-            <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="/testimonals">testimonals</a>
+            <a class="hover:bg-white hover:text-yellow-500 px-4 py-2 rounded transition {% if request.path == '/' or request.path == '/my-uploaded-scholarships' %}bg-white text-yellow-500{% else %}hover:bg-white hover:text-yellow-500{% endif %}" href="/">Home</a>
+            <a class="hover:bg-white hover:text-yellow-500 px-4 py-2 rounded transition {% if request.path == '/about' %}bg-white text-yellow-500{% else %}hover:bg-white hover:text-yellow-500{% endif %}" href="/about">About</a>
+            <a class="hover:bg-white hover:text-yellow-500 px-4 py-2 rounded transition {% if request.path == '/platform' %}bg-white text-yellow-500{% else %}hover:bg-white hover:text-yellow-500{% endif %}" href="/platform">Platform</a>
+            <a class="hover:bg-white hover:text-yellow-500 px-4 py-2 rounded transition {% if request.path == '/categories' %}bg-white text-yellow-500{% else %}hover:bg-white hover:text-yellow-500{% endif %}" href="/categories">Categories</a>
+            <a class="hover:bg-white hover:text-yellow-500 px-4 py-2 rounded transition {% if request.path == '/guide' %}bg-white text-yellow-500{% else %}hover:bg-white hover:text-yellow-500{% endif %}" href="/guide">Guide</a>
+            <a class="hover:bg-white hover:text-yellow-500 px-4 py-2 rounded transition {% if request.path == '/testimonals' %}bg-white text-yellow-500{% else %}hover:bg-white hover:text-yellow-500{% endif %}" href="/testimonals">Testimonals</a>
         </nav>
         {% if user.is_authenticated %}
 <div class="relative">
@@ -23,17 +23,18 @@
             <p class="text-sm text-gray-600">{{ user.email }}</p>
         </div>
         <ul class="py-2">
-            <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-            </li>
+            <!-- <li>
+                <a href="#" class="block px-4 py-2 text-sm  hover:bg-gray-100">Profile</a>
+            </li> -->
             {% if user.acc_type == '2' %}
             <li>
-                <a href="/post-scholarship" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Post Scholarships</a>
+                <a href="/post-scholarship" class="text-gray-500 block px-4 py-2 text-sm  hover:bg-gray-100">Post Scholarships</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="/my-scholarships" class="text-gray-500 block px-4 py-2 text-sm  hover:bg-gray-100">Applied Scholarships</a>
             </li>
             {% endif %}
-            <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-            </li>
             <li>
                 <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-red-500 hover:bg-gray-100">Logout</a>
             </li>
@@ -42,7 +43,7 @@
 </div>
 {% else %}
 <div class="space-x-4">
-    <button id="loginButton" onclick="openLoginForm()" class="px-4 py-2 border border-yellow-500 text-yellow-500 rounded-full hover:bg-yellow-500 hover:text-white transition">Login</button>
+    <button id="loginButton" onclick="openLoginForm()" class="px-4 py-2 border border-yellow-500 text-yellow-500 rounded-fullhover:bg-white hover:text-yellow-500 transition">Login</button>
     <a href="/signup" class="px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition">Sign Up</a>
 </div>
 {% endif %}

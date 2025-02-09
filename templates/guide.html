@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Guide Tips and Newsletter - Schdent</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@600&display=swap" rel="stylesheet"/>
-    <style>
+{% extends "base.html" %}
+{% block title %}
+  Guide
+{% endblock title %}
+{% block body %}
+{% include "components/navbar.html" %}
+<style>
         body {
             font-family: 'Roboto', sans-serif;
         }
@@ -93,23 +90,6 @@
             scroll-behavior: smooth;
         }
     </style>
-</head>
-<body class="bg-gray-50 smooth-scroll">
-    <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold">Schdent</div>
-            <nav class="space-x-8">
-                <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="home.html">Home</a>
-                <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="aboutus.html">About Us</a>
-                <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="platform.html">Platform</a>
-                <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="categories.html">Categories</a>
-                <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="guide.html">Guide</a>
-                <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="testimonals.html">Testimonials</a>
-                <a class="text-gray-700 hover:bg-yellow-500 hover:text-white px-4 py-2 rounded transition" href="contact.html">Contact</a>
-            </nav>
-        </div>
-    </header>
 
     <!-- Guide Tips Section -->
     <div class="max-w-7xl mx-auto p-6">
@@ -210,5 +190,4 @@
             alert("Thank you for subscribing! We'll keep you updated.");
         }
     </script>
-</body>
-</html>
+{% endblock body %}

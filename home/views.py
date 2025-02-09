@@ -14,8 +14,14 @@ from django.contrib.auth.decorators import login_required
 User = get_user_model()
 
 def home(request):
+    if request.user.is_authenticated and request.user.acc_type == '2':
+        return redirect('/my-uploaded-scholarships') 
     scholarships = Scholarship.objects.all().order_by('-created_at')[:9]
     return render(request, "index.html", {'scholarships': scholarships})
+
+def myUploadedScholarships(request):
+    scholarships = Scholarship.objects.filter(posted_by=request.user).order_by('-created_at')
+    return render(request, "my_uploaded_scholarships.html", {'scholarships': scholarships})
 
 def signup(request):
     return render(request, "signup.html")

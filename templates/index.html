@@ -25,7 +25,7 @@
             <img alt="Profile picture of a participant" class="w-10 h-10 rounded-full" src="https://placehold.co/40x40"/>
         </div>
     </div>
-    <div class="lg:w-1/2 mt-12 lg:mt-0 relative">
+    <div class="lg:w-1/2 mt-12 lg:mt-0 relative flex justify-end">
         <img alt="Smiling student holding books" class="w-100 h-150 rounded-lg" src="https://zeftbusinessschool.com/wp-content/uploads/2024/01/MBA-Courses-in-Chennai.png"/>
         <div class="absolute top-0 left-0 w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
             <i class="fas fa-book text-blue-500"></i>
@@ -141,30 +141,6 @@
           {% empty %}
           <p>No Scholarships Available</p>
         {% endfor %}
-        <!-- Scholarship Card 1 -->
-        <div class="bg-white p-6 rounded-lg shadow-lg hover-scale">
-            <h3 class="text-xl font-bold mb-2">Merit-Based Scholarship</h3>
-            <p class="text-gray-600">Provided by: <span class="font-semibold">Google</span></p>
-            <p class="text-gray-600">Amount: <span class="font-semibold">$10,000</span></p>
-            <p class="text-gray-600">Expiry Date: <span class="font-semibold">31st Dec 2024</span></p>
-            <button class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Apply Now</button>
-        </div>
-        <!-- Scholarship Card 2 -->
-        <div class="bg-white p-6 rounded-lg shadow-lg hover-scale">
-            <h3 class="text-xl font-bold mb-2">Need-Based Scholarship</h3>
-            <p class="text-gray-600">Provided by: <span class="font-semibold">Microsoft</span></p>
-            <p class="text-gray-600">Amount: <span class="font-semibold">$8,000</span></p>
-            <p class="text-gray-600">Expiry Date: <span class="font-semibold">15th Nov 2024</span></p>
-            <button class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Apply Now</button>
-        </div>
-        <!-- Scholarship Card 3 -->
-        <div class="bg-white p-6 rounded-lg shadow-lg hover-scale">
-            <h3 class="text-xl font-bold mb-2">Sports Scholarship</h3>
-            <p class="text-gray-600">Provided by: <span class="font-semibold">Nike</span></p>
-            <p class="text-gray-600">Amount: <span class="font-semibold">$5,000</span></p>
-            <p class="text-gray-600">Expiry Date: <span class="font-semibold">30th Sep 2024</span></p>
-            <button class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600">Apply Now</button>
-        </div>
     </div>
 </section>
 
@@ -337,59 +313,7 @@
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="bg-white py-12">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-                <h3 class="text-xl font-bold mb-4">Schdent</h3>
-                <p class="text-gray-600">Empowering students with opportunities for a brighter future.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a class="footer-link text-gray-600" href="home.html">Home</a></li>
-                    <li><a class="footer-link text-gray-600" href="aboutus.html">About Us</a></li>
-                    <li><a class="footer-link text-gray-600" href="platform.html">Platform</a></li>
-                    <li><a class="footer-link text-gray-600" href="categories.html">Categories</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">Contact Us</h3>
-                <p class="text-gray-600">Email: support@schdent.com</p>
-                <p class="text-gray-600">Phone: +1 (123) 456-7890</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">Follow Us</h3>
-                <div class="flex space-x-4">
-                    <a class="text-gray-600 hover:text-yellow-500" href="#"><i class="fab fa-facebook"></i></a>
-                    <a class="text-gray-600 hover:text-yellow-500" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="text-gray-600 hover:text-yellow-500" href="#"><i class="fab fa-instagram"></i></a>
-                    <a class="text-gray-600 hover:text-yellow-500" href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- Login Modal -->
-<!-- <div id="loginModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="text-xl font-bold mb-4">Login</h2>
-        <form>
-            <div class="mb-4">
-                <label class="block text-gray-700">Email</label>
-                <input type="email" class="border border-gray-300 p-2 w-full rounded" required>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700">Password</label>
-                <input type="password" class="border border-gray-300 p-2 w-full rounded" required>
-            </div>
-            <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Login</button>
-            <button type="button" class="mt-2 text-gray-500 hover:text-yellow-500" onclick="toggleModal('loginModal')">Close</button>
-        </form>
-    </div>
-</div> -->
+{% include "components/footer.html" %}
 
 <!-- Sign Up Modal -->
 <div id="signupModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">

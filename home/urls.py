@@ -11,6 +11,7 @@ urlpatterns = [
     path('categories', categories, name='categories'),
     path('guide',guide, name='guide'),
     path('testimonals',testimonals, name='testimonals'),
+    path('my-uploaded-scholarships',myUploadedScholarships, name='testimonals'),
 
     path('login/', login_user, name='login'),
     path('logout/', logoutUser, name='logout'),
